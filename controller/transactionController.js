@@ -100,9 +100,9 @@ const getBarChartData = async (req, res) => {
 
     console.log("Normalized Month:", normalizedMonth, "Month Index:", monthIndex);
 
-    // Aggregation pipeline
+
     const result = await Transaction.aggregate([
-      // Match stage: Filter by month and ensure valid fields
+
       {
         $match: {
           $and: [
@@ -112,7 +112,7 @@ const getBarChartData = async (req, res) => {
           ],
         },
       },
-      // Bucket stage: Group prices into defined ranges
+
       {
         $bucket: {
           groupBy: "$price",
@@ -125,7 +125,7 @@ const getBarChartData = async (req, res) => {
 
     console.log("Aggregation Result:", result);
 
-    // Respond with the aggregated result
+
     res.status(200).json(result);
   } catch (error) {
     console.error("Error fetching bar chart data:", error.stack);
